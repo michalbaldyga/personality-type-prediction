@@ -15,4 +15,4 @@ def preprocess_function(examples):
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 
-data_collator = DataCollatorWithPadding
+data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
