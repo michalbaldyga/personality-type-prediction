@@ -1,14 +1,17 @@
-from datasets import load_dataset, ClassLabel
+from datasets import load_dataset, ClassLabel, Dataset
 from transformers import AutoTokenizer, DataCollatorWithPadding, \
     AutoModelForSequenceClassification, TrainingArguments, Trainer
 import evaluate
 import numpy as np
+import pandas as pd
 
-# Load dataset
-dataset = load_dataset("json", data_files="dataset.json")['train']
+# Load dataset and labels
+df = pd.read_csv("./BERT/dataset.csv", delimiter='|')
+df = pd.DataFrame(df)
+df = df.dropna() # Remove all None rows
+dataset = Dataset.from_pandas(df)
 dataset = dataset.train_test_split(test_size=0.2)
-
-labels = ClassLabel(names_file='labels.txt')
+labels = ClassLabel(names_file='./BERT/labels.txt')
 
 # Preprocess
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
