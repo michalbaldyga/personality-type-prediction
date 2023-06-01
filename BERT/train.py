@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 # Load dataset and labels
-df = pd.read_csv("./BERT/dataset.csv", delimiter='|')
+df = pd.read_csv("./BERT/datasets/dataset_twitter.csv", delimiter='|')
 df = pd.DataFrame(df)
 df = df.dropna() # Remove all None rows
 dataset = Dataset.from_pandas(df)
