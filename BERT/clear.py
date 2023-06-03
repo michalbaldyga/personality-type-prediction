@@ -4,7 +4,8 @@ import re
 def clear_data(text):
     # Removing Tweets
     text = re.sub(r'Tweets', '', text, re.DOTALL, flags=re.IGNORECASE)
-
+    # diffent emojis pattern
+    text = re.sub(r'\p{So}', '', string)
     # Emojis pattern
     text = re.sub("["
                   u"\U0001F600-\U0001F64F"  # emoticons
