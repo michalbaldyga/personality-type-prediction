@@ -4,6 +4,25 @@ from transformers import pipeline
 import re
 
 
+classifier = pipeline("text-classification", model="../model", tokenizer="distilbert-base-uncased",
+                      framework="pt", top_k=16)
+
+
+def predict(text: str):
+    # split text to batches of 512 tokens
+    batch_size = 512
+    batches = [text[i:i+batch_size] for i in range(0, len(text), batch_size)]
+
+    # predict
+    predictions = {}
+    for batch in batches:
+        result = classifier(batch, padding=True)
+        for res in result[0]:
+            predictions[res['label']] = predictions.get(res['label'], 0) + res['score']
+
+    print(sorted(predictions.items(), key=lambda item: item[1], reverse=True))
+
+
 def clean_tweet(tweet):
     return tweet
 
