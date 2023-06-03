@@ -1,10 +1,7 @@
 # pip3 install git+https://github.com/JustAnotherArchivist/snscrape.git
 import snscrape.modules.twitter as sntwitter
 import re
-
-
-def clean_tweet(tweet):
-    return tweet
+from clear import clear_data
 
 
 def get_input_from_user():
@@ -29,6 +26,6 @@ def get_tweets(username, no_of_tweets):
         if i > no_of_tweets:
             break
 
-        text += clean_tweet([tweet.rawContent][0]) + '. '
+        text += [tweet.rawContent][0] + '. '
 
-    return text
+    return clear_data(text)
