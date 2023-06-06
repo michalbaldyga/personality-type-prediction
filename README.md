@@ -23,7 +23,7 @@ The goal of the project is to create a tool for predicting personality type base
  - [Twitter dataset](https://www.kaggle.com/datasets/datasnaek/mbti-type)
  - [Autobiographies dataset](https://www.gutenberg.org/)
 
- - [MBTI Personality Types](16personalities.com/pl/typy-osobowosci)
+ - [MBTI Personality Types](https://www.16personalities.com/personality-types)
 
 ## Authors
 
