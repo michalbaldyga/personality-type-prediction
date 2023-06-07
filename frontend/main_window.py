@@ -8,13 +8,13 @@ import utils_front
 class MainWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Aplikacja do predykcji typu osobowości")
+        self.root.title("Personality type prediction app")
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
         self.label = tk.Label(
             self.root,
-            text="Witaj!",
+            text="Welcome!",
             bg=bg_color,
             fg=text_color,
             font=custom_font_bold,
@@ -24,7 +24,7 @@ class MainWindow:
 
         self.label = tk.Label(
             self.root,
-            text="Zapraszamy do wypróbowania naszej aplikacji do predykcji typu osobowości na podstawie aktywności cyfrowej!",
+            text="You are invited to try our personality type prediction app based on digital activity",
             bg=bg_color,
             fg=text_color,
             font=midi_font,
@@ -34,7 +34,7 @@ class MainWindow:
 
         self.start_button = tk.Button(
             self.root,
-            text="Zaczynamy!",
+            text="Let's start!",
             bg=button_bg_color,
             fg=button_fg_color,
             font=midi_font_bold,
