@@ -8,7 +8,7 @@ import utils_front
 class LoginWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Log in")
+        self.root.title("Login")
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
