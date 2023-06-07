@@ -17,7 +17,7 @@ The goal of the project is to create a tool for predicting personality type base
 - [x]  Training a language model
 - [X]  Creating a user interface
 
-## Acknowledgements
+## Documentation
 - [Recent Trends in Deep Learning Based Personality Detection](https://arxiv.org/pdf/1908.03628.pdf)
  - [BERT](https://huggingface.co/docs/transformers/tasks/sequence_classification)
  - [Twitter dataset](https://www.kaggle.com/datasets/datasnaek/mbti-type)
