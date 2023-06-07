@@ -8,11 +8,11 @@ import utils_front
 class LoginWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Logowanie")
+        self.root.title("Log in")
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
-        self.label = tk.Label(self.root, text="Logowanie", bg=bg_color, fg=text_color, font=custom_font_bold)
+        self.label = tk.Label(self.root, text="Log in", bg=bg_color, fg=text_color, font=custom_font_bold)
         self.label.pack(pady=80)
 
         login_frame = tk.Frame(self.root, bg=frame_color, padx=10, pady=10)
@@ -24,7 +24,7 @@ class LoginWindow:
         self.login_entry = tk.Entry(login_frame, bg=bg_entry_color, fg=text_color, font=midi_font)
         self.login_entry.grid(row=0, column=1, padx=10, pady=10)
 
-        password_label = tk.Label(login_frame, text="Hasło:", bg=frame_color, fg=text_color, font=midi_font)
+        password_label = tk.Label(login_frame, text="Password:", bg=frame_color, fg=text_color, font=midi_font)
         password_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.password_entry = tk.Entry(login_frame, show="*", bg=bg_entry_color, fg=text_color, font=midi_font)
@@ -38,7 +38,7 @@ class LoginWindow:
 
         login_button = tk.Button(
             login_frame,
-            text="Zaloguj",
+            text="Log in",
             bg=button_confirmation_color,
             fg=button_fg_color,
             font=midi_font_bold,
@@ -51,7 +51,7 @@ class LoginWindow:
 
         registration_label = tk.Label(
             self.root,
-            text="Nie masz jeszcze konta?",
+            text="Don't have any account yet?",
             bg=bg_color,
             fg=text_color,
             font=mini_font,
@@ -60,7 +60,7 @@ class LoginWindow:
 
         registration_button = tk.Button(
             self.root,
-            text="Zarejestruj się",
+            text="Register",
             bg=button_bg_color,
             fg=button_fg_color,
             font=mini_font_underline,
@@ -81,22 +81,22 @@ class LoginWindow:
 
         user_directory = os.path.join("users", username)
         if not os.path.exists(user_directory):
-            self.error_label.config(text="Taki użytkownik nie istnieje")
+            self.error_label.config(text="Such user doesn't exist")
             return
 
         password_file = os.path.join(user_directory, "password.txt")
         if not os.path.isfile(password_file):
-            self.error_label.config(text="Taki użytkownik nie istnieje")
+            self.error_label.config(text="Such user doesn't exist")
             return
 
         with open(password_file, "r") as file:
             stored_password = file.read().strip()
 
         if password != stored_password:
-            self.error_label.config(text="Podano błędne hasło")
+            self.error_label.config(text="Wrong password was given")
         else:
             self.error_label.config(text="")
-            self.success_label.config(text="Zalogowano pomyślnie")
+            self.success_label.config(text="You have successfully logged in")
             self.root.after(1000, self.open_main_app_window)
 
     def open_registration_window(self):
