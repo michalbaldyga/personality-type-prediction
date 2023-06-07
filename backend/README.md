@@ -1,16 +1,37 @@
+
 # MBTI Prediction using BERT
+
+The BERT model was proposed in BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding by Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. It’s a bidirectional transformer pretrained using a combination of masked language modeling objective and next sentence prediction on a large corpus comprising the Toronto Book Corpus and Wikipedia.
+
+
+## Documentation
 
 https://huggingface.co/docs/transformers/tasks/sequence_classification
 
-## Installation of all necessary libraries:
-`pip3 install transformers datasets evaluate scikit-learn`\
-`pip3 install git+https://github.com/JustAnotherArchivist/snscrape.git`
 
-## PyTorch for Windows:
-`pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117`
+## Installation
+
+Installation of all necessary libraries:
+
+```bash
+  pip3 install transformers datasets evaluate scikit-learn
+  pip3 install git+https://github.com/JustAnotherArchivist/snscrape.git
+```
+
+PyTorch for Windows:
+
+```bash
+  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+```
 
 Using the `Trainer` with `PyTorch` requires `accelerate`: Run `pip3 install --upgrade accelerate`
+    
+## Optimizations
 
-
-## Additional improvement:
 If you want to use `memorry_efficient_attention` to accelerate training use the following command to install Xformers: `pip3 install xformers`
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
