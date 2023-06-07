@@ -12,19 +12,18 @@ import utils_front
 class TwitterPredictionWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Predykcja z Twittera")
+        self.root.title("Twitter prediction")
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
-        self.title_label = tk.Label(self.root, text="Twitter", bg=bg_color, fg=twitter_color, font=custom_font_bold)
+        self.title_label = tk.Label(self.root, text="Twitter prediction", bg=bg_color, fg=twitter_color, font=custom_font_bold)
         self.title_label.pack(pady=30)
 
         description_label = tk.Label(
             self.root,
-            text="Predykcja na podstawie nazwy użytkownika na Twitterze. Proszę "
-                 "podaj poniżej nick użytkownika, którego typ osobowości chcesz "
-                 "predykować oraz liczbę tweetów (od najnowszych), na bazie których "
-                 "odbędzie się predykcja",
+            text="Prediction based on Twitter username. Please enter below the nickname of the user whose personality "
+                 "type you want to predict and the number of tweets (from the most recent) based on which the "
+                 "prediction will take place",
             bg=bg_color,
             fg=text_color,
             font=midi_font,
@@ -35,13 +34,13 @@ class TwitterPredictionWindow:
         details_frame = tk.Frame(self.root, bg=frame_color, padx=10, pady=10)
         details_frame.pack()
 
-        username_label = tk.Label(details_frame, text="Podaj nick:", bg=frame_color, fg=text_color, font=midi_font)
+        username_label = tk.Label(details_frame, text="nickname:", bg=frame_color, fg=text_color, font=midi_font)
         username_label.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.username_entry = tk.Entry(details_frame, bg=bg_entry_color, fg=text_color, font=midi_font)
         self.username_entry.grid(row=0, column=1, padx=10, pady=10)
 
-        tweet_label = tk.Label(details_frame, text="Ile tweetów:", bg=frame_color, fg=text_color, font=midi_font)
+        tweet_label = tk.Label(details_frame, text="no. tweets:", bg=frame_color, fg=text_color, font=midi_font)
         tweet_label.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.tweet_value = tk.StringVar()
@@ -80,7 +79,7 @@ class TwitterPredictionWindow:
 
         predict_button = tk.Button(
             details_frame,
-            text="Predykuj",
+            text="Predict",
             bg=twitter_color,
             fg=button_fg_color,
             font=midi_font_bold,
@@ -91,12 +90,12 @@ class TwitterPredictionWindow:
         )
         predict_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
-        self.result_label = tk.Label(self.root, text="Wyniki predykcji", bg=bg_color, fg=text_color, font=midi_font)
+        self.result_label = tk.Label(self.root, text="Prediction results", bg=bg_color, fg=text_color, font=midi_font)
         self.result_label.pack(pady=10)
 
         registration_button = tk.Button(
             self.root,
-            text="Powrót",
+            text="Go back",
             bg=bg_color,
             fg=text_color,
             font=mini_font_underline,
@@ -111,7 +110,7 @@ class TwitterPredictionWindow:
 
         self.button_twitter_details = tk.Button(
             self.root,
-            text="Kliknij, by zobaczyć szczegółowy opis",
+            text="Click here to see a detailed description",
             bg=twitter_color,
             fg=button_fg_color,
             font=mini_font,
@@ -123,50 +122,54 @@ class TwitterPredictionWindow:
             activeforeground=active_fg_color,
         )
         self.button_twitter_details.pack(pady=10)
-        self.button_twitter_details.pack_forget()  # Ukrycie przycisku na początku
+        # Hide the button at the beginning
+        self.button_twitter_details.pack_forget()
 
     def predict_personality(self):
         username = self.username_entry.get()
         tweet_count = int(self.tweet_entry.get())
 
         if not username or not tweet_count:
-            self.error_label.config(text="Pole nick lub liczba tweetów nie mogą być puste")
+            self.error_label.config(text="Fields cannot be empty")
             self.result_label.config(text="")
-            self.button_twitter_details.pack_forget()  # Ukrycie przycisku w przypadku błędu
+            # Hide button in case of error
+            self.button_twitter_details.pack_forget()
             return
 
-        # Usunięcie poprzednich komunikatów o błędach
+        # Removal of previous error messages
         self.error_label.config(text="")
 
         if tweet_count <= 0:
-            self.error_label.config(text="Liczba tweetów musi być większa od zera")
+            self.error_label.config(text="The number of tweets must be greater than zero")
             self.result_label.config(text="")
-            self.button_twitter_details.pack_forget()  # Ukrycie przycisku w przypadku błędu
+            # Hide button in case of error
+            self.button_twitter_details.pack_forget()
             return
 
-        # Usunięcie poprzednich komunikatów o błędach
+        # Removal of previous error messages
         self.error_label.config(text="")
 
-        # Kod do przetworzenia predykcji na podstawie nazwy użytkownika na Twitterze
+        # Code to process prediction based on Twitter username
         tweets_content = get_tweets(username, tweet_count)
         if tweets_content != '':
             predicted_types = predict(tweets_content)
         else:
-            self.error_label.config(text="Konto nie istnieje lub nie ma tweetów")
+            self.error_label.config(text="Account does not exist or has no tweets")
             self.result_label.config(text="")
-            self.button_twitter_details.pack_forget()  # Ukrycie przycisku w przypadku błędu
+            # Hide button in case of error
+            self.button_twitter_details.pack_forget()
             return
 
-        # Usunięcie poprzednich komunikatów o błędach
+        # Removal of previous error messages
         self.error_label.config(text="")
 
-        # Wyświetlenie wyniku predykcji
-        self.result_label.config(text="Wynik predykcji:\n\n "
+        # Display of the prediction result
+        self.result_label.config(text="Prediction result:\n\n "
                                       + "  1." + predicted_types[0]
                                       + "  2." + predicted_types[1]
                                       + "  3." + predicted_types[2])
-
-        self.button_twitter_details.pack()  # Wyświetlenie przycisku po prawidłowej predykcji
+        # Displaying the button after a correct prediction
+        self.button_twitter_details.pack()
 
     def on_scale_change(self, value):
         self.tweet_value.set(value)
