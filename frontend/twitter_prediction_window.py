@@ -160,6 +160,13 @@ class TwitterPredictionWindow:
             self.button_twitter_details.pack_forget()
             return
 
+        if predicted_types is None:
+            self.error_label.config(text="Can't load model")
+            self.result_label.config(text="")
+            # Hide button in case of error
+            self.button_twitter_details.pack_forget()
+            return
+
         # Removal of previous error messages
         self.error_label.config(text="")
 
