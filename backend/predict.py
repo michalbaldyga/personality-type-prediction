@@ -6,7 +6,7 @@ from user_input import get_input_from_user, get_tweets
 try:
     classifier = pipeline(
         "text-classification",
-        model=os.path.join(os.path.dirname(__file__), 'bert_model/model'),
+        model='model',
         tokenizer="distilbert-base-uncased",
         framework="pt", top_k=16)
 except OSError:
