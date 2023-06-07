@@ -8,13 +8,13 @@ import utils_front
 class RegistrationWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Rejestracja")
+        self.root.title("Register")
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
         self.label = tk.Label(
             self.root,
-            text="Rejestracja",
+            text="Register",
             bg=bg_color,
             fg=text_color,
             font=custom_font_bold,
@@ -43,7 +43,7 @@ class RegistrationWindow:
 
         password_label = tk.Label(
             main_frame,
-            text="Hasło:",
+            text="Password:",
             bg=frame_color,
             fg=text_color,
             font=midi_font,
@@ -61,7 +61,7 @@ class RegistrationWindow:
 
         confirm_password_label = tk.Label(
             main_frame,
-            text="Powtórz hasło:",
+            text="Repeat password:",
             bg=frame_color,
             fg=text_color,
             font=midi_font,
@@ -97,7 +97,7 @@ class RegistrationWindow:
 
         registration_button = tk.Button(
             main_frame,
-            text="Zarejestruj się",
+            text="Register",
             bg=button_confirmation_color,
             fg=button_fg_color,
             font=midi_font_bold,
@@ -110,7 +110,7 @@ class RegistrationWindow:
 
         registration_button = tk.Button(
             self.root,
-            text="Powrót od logowania",
+            text="Back to Login",
             bg=button_bg_color,
             fg=button_fg_color,
             font=mini_font_underline,
@@ -131,16 +131,16 @@ class RegistrationWindow:
         confirm_password = self.confirm_password_entry.get()
 
         if not username or not password or not confirm_password:
-            self.error_label.config(text="Wszystkie pola muszą być wypełnione")
+            self.error_label.config(text="All fields must be completed")
             return
 
         user_directory = os.path.join("users", username)
         if os.path.exists(user_directory):
-            self.error_label.config(text="Taki użytkownik już istnieje")
+            self.error_label.config(text="Such a user already exists")
             return
 
         if password != confirm_password:
-            self.error_label.config(text="Podane hasła nie są jednakowe")
+            self.error_label.config(text="The given passwords are not the same")
             return
 
         os.makedirs(user_directory)
@@ -148,7 +148,7 @@ class RegistrationWindow:
         with open(password_file, "w") as file:
             file.write(password)
 
-        # Usunięcie poprzednich komunikatów o błędach i sukcesie
+        # Removal of previous error and success messages
         self.error_label.config(text="")
         self.success_label.config(text="")
 
@@ -156,10 +156,10 @@ class RegistrationWindow:
         self.password_entry.delete(0, tk.END)
         self.confirm_password_entry.delete(0, tk.END)
 
-        self.success_label.config(text="Rejestracja przebiegła pomyślnie!")
+        self.success_label.config(text="Registration was successful!")
 
-        # Otwieranie okna logowania po pomyślnej rejestracji z opóźnieniem 1 sekundy
-        self.root.after(5000, self.open_login_window)
+        # Opening the login window after successful registration with a delay of 1 second        self.root.after(
+        # 5000, self.open_login_window) 
 
     def open_login_window(self):
         utils_front.open_login_window(self.root)
