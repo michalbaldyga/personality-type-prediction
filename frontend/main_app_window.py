@@ -6,13 +6,13 @@ from twitter_prediction_window import TwitterPredictionWindow
 class MainAppWindow:
     def __init__(self, root):
         self.root = root
-        self.root.title("Strona główna")
+        self.root.title("Main Page")
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
         self.label = tk.Label(
             self.root,
-            text="Strona główna",
+            text="Main Page",
             bg=bg_color,
             fg=text_color,
             font=custom_font_bold,
@@ -21,12 +21,11 @@ class MainAppWindow:
 
         description_label = tk.Label(
             self.root,
-            text="Odkryj swoją lub czyjąś osobowość dzięki naszej zaawansowanej "
-            "analizie danych cyfrowych! \n\nWykorzystując informacje z platform "
-            "społecznościowych, takich jak Twitter, "
-            "nasza aplikacja oferuje precyzyjne prognozy dotyczące "
-            "typu osobowości. Odkryj, jakie wnioski można wyciągnąć z danych i "
-            "zanurz się w fascynującym świecie analizy cyfrowej!",
+            text="Discover your or someone else's personality with our advanced "
+             "analyzing app! \n\nUsing information from social media platforms such as Twitter, "
+             "our application offers precise forecasts for a "
+             "personality type. Discover what conclusions can be drawn from the data and "
+             "immerse yourself in the fascinating world of digital analysis!",
             bg=bg_color,
             fg=text_color,
             font=midi_font,
