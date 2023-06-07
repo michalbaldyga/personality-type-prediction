@@ -7,6 +7,8 @@ import evaluate
 import numpy as np
 import pandas as pd
 
+MODEL_OUTPUT_DIR = "../model"
+
 # Load dataset and labels
 df = pd.read_csv("../../datasets/dataset_twitter.csv", delimiter='|')
 df = pd.DataFrame(df)
@@ -57,7 +59,7 @@ model = AutoModelForSequenceClassification.from_pretrained(
 )
 
 training_args = TrainingArguments(
-    output_dir='model',
+    output_dir=MODEL_OUTPUT_DIR,
     learning_rate=2e-5,
     per_device_train_batch_size=16,
     per_device_eval_batch_size=16,
@@ -80,4 +82,4 @@ trainer = Trainer(
 )
 
 trainer.train()
-trainer.save_model("model")
+trainer.save_model(MODEL_OUTPUT_DIR)
