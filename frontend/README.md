@@ -43,6 +43,12 @@ The following packages are used in this project:
     python3 main.py
     ```
 
+- in case of "ModuleNotFoundError: No module named 'backend'", navigate to the project directory and add it to PYTHONPATH
+
+	```shell
+	export PYTHONPATH=$PWD
+	```
+
 2. The application will open `main_window.py` file.
 
 3. To start using the app you should first click the button below the welcome text
