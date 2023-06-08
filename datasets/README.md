@@ -49,7 +49,7 @@ Tweets obtained from the most popular accounts according to the site:
 
 
 
-## Acknowledgements
+## Documentation
 
 Websites based on which we determined the user's personality type:
  - [IDRlabs](https://www.idrlabs.com/)
