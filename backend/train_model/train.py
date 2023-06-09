@@ -12,7 +12,7 @@ MODEL_OUTPUT_DIR = "../model"
 # Load dataset and labels
 df = pd.read_csv("../../datasets/dataset_twitter.csv", delimiter='|')
 df = pd.DataFrame(df)
-df = df.dropna() # Remove all None rows
+df = df.dropna()  # Remove all None rows
 dataset = Dataset.from_pandas(df)
 dataset = dataset.train_test_split(test_size=0.2)
 labels = ClassLabel(names_file='labels.txt')
