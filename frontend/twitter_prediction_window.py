@@ -1,6 +1,8 @@
 import tkinter as tk
 import sys
 import os
+from tkinter import ttk
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'backend'))
 print(os.path.realpath("backend"))
 from backend.predict import predict
@@ -90,7 +92,18 @@ class TwitterPredictionWindow:
         )
         predict_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
-        self.result_label = tk.Label(self.root, text="Prediction results", bg=bg_color, fg=text_color, font=midi_font)
+        self.progress_bar = ttk.Progressbar(self.root,
+                                            orient='horizontal',
+                                            length=300,
+                                            mode='indeterminate')
+        self.progress_bar.pack(pady=10)
+        self.progress_bar.pack_forget()
+
+        self.result_label = tk.Label(self.root,
+                                     text="",
+                                     bg=bg_color,
+                                     fg=text_color,
+                                     font=midi_font)
         self.result_label.pack(pady=10)
 
         registration_button = tk.Button(
@@ -107,23 +120,25 @@ class TwitterPredictionWindow:
             activeforeground=active_fg_color,
         )
         registration_button.pack(pady=10)
+        # TODO Add details about personality types
 
-        self.button_twitter_details = tk.Button(
-            self.root,
-            text="Click here to see a detailed description",
-            bg=twitter_color,
-            fg=button_fg_color,
-            font=mini_font,
-            command=self.show_details,
-            relief=tk.FLAT,
-            padx=2,
-            pady=2,
-            activebackground=active_bg_color,
-            activeforeground=active_fg_color,
-        )
-        self.button_twitter_details.pack(pady=10)
-        # Hide the button at the beginning
-        self.button_twitter_details.pack_forget()
+        '''
+            self.button_twitter_details = tk.Button(
+                self.root,
+                text="Click here to see a detailed description",
+                bg=twitter_color,
+                fg=button_fg_color,
+                font=mini_font,
+                command=self.show_details,
+                relief=tk.FLAT,
+                padx=2,
+                pady=2,
+                activebackground=active_bg_color,
+                activeforeground=active_fg_color,
+            )
+            self.button_twitter_details.pack(pady=10)
+            self.button_twitter_details.pack_forget()  # hide a button
+        '''
 
     def predict_personality(self):
         username = self.username_entry.get()
@@ -133,7 +148,7 @@ class TwitterPredictionWindow:
             self.error_label.config(text="Fields cannot be empty")
             self.result_label.config(text="")
             # Hide button in case of error
-            self.button_twitter_details.pack_forget()
+            # self.button_twitter_details.pack_forget()
             return
 
         # Removal of previous error messages
@@ -143,7 +158,7 @@ class TwitterPredictionWindow:
             self.error_label.config(text="The number of tweets must be greater than zero")
             self.result_label.config(text="")
             # Hide button in case of error
-            self.button_twitter_details.pack_forget()
+            # self.button_twitter_details.pack_forget()
             return
 
         # Removal of previous error messages
@@ -157,14 +172,14 @@ class TwitterPredictionWindow:
             self.error_label.config(text="Account does not exist or has no tweets")
             self.result_label.config(text="")
             # Hide button in case of error
-            self.button_twitter_details.pack_forget()
+            # self.button_twitter_details.pack_forget()
             return
 
         if predicted_types is None:
             self.error_label.config(text="Can't load model")
             self.result_label.config(text="")
             # Hide button in case of error
-            self.button_twitter_details.pack_forget()
+            # self.button_twitter_details.pack_forget()
             return
 
         # Removal of previous error messages
@@ -176,7 +191,7 @@ class TwitterPredictionWindow:
                                       + "  2." + predicted_types[1]
                                       + "  3." + predicted_types[2])
         # Displaying the button after a correct prediction
-        self.button_twitter_details.pack()
+        # self.button_twitter_details.pack()
 
     def on_scale_change(self, value):
         self.tweet_value.set(value)
@@ -188,8 +203,10 @@ class TwitterPredictionWindow:
         except ValueError:
             pass
 
+    # TODO deatails of the type
+    '''
     def show_details(self):
         pass
-
+    '''
     def open_main_app_window(self):
         utils_front.open_main_app_window(self.root)
