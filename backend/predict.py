@@ -31,9 +31,7 @@ def predict(text: str):
         best_predictions_list = []
         for prediction in best_predictions:
             best_predictions_list.append(str(prediction[0]))
-        print(best_predictions_list)
 
         return best_predictions_list
     else:
-        print("Can't load directory with model")
         return None

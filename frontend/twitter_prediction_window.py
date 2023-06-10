@@ -1,10 +1,10 @@
+import threading
 import tkinter as tk
 import sys
 import os
 from tkinter import ttk
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'backend'))
-print(os.path.realpath("backend"))
 from backend.predict import predict
 from backend.user_input import get_tweets
 from constants import *
@@ -18,7 +18,8 @@ class TwitterPredictionWindow:
         self.root.geometry(f"{window_width}x{window_height}")
         self.root.configure(bg=bg_color)
 
-        self.title_label = tk.Label(self.root, text="Twitter prediction", bg=bg_color, fg=twitter_color, font=custom_font_bold)
+        self.title_label = tk.Label(self.root, text="Twitter prediction", bg=bg_color, fg=twitter_color,
+                                    font=custom_font_bold)
         self.title_label.pack(pady=30)
 
         description_label = tk.Label(
@@ -78,35 +79,7 @@ class TwitterPredictionWindow:
 
         self.error_label = tk.Label(self.root, text="", bg=bg_color, fg=error_color, font=mini_font)
         self.error_label.pack()
-
-        predict_button = tk.Button(
-            details_frame,
-            text="Predict",
-            bg=twitter_color,
-            fg=button_fg_color,
-            font=midi_font_bold,
-            command=self.predict_personality,
-            relief=tk.FLAT,
-            activebackground=active_bg_color,
-            activeforeground=active_fg_color,
-        )
-        predict_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
-
-        self.progress_bar = ttk.Progressbar(self.root,
-                                            orient='horizontal',
-                                            length=300,
-                                            mode='indeterminate')
-        self.progress_bar.pack(pady=10)
-        self.progress_bar.pack_forget()
-
-        self.result_label = tk.Label(self.root,
-                                     text="",
-                                     bg=bg_color,
-                                     fg=text_color,
-                                     font=midi_font)
-        self.result_label.pack(pady=10)
-
-        registration_button = tk.Button(
+        self.registration_button = tk.Button(
             self.root,
             text="Go back",
             bg=bg_color,
@@ -119,7 +92,34 @@ class TwitterPredictionWindow:
             activebackground=bg_color,
             activeforeground=active_fg_color,
         )
-        registration_button.pack(pady=10)
+        self.predict_button = tk.Button(
+            details_frame,
+            text="Predict",
+            bg=twitter_color,
+            fg=button_fg_color,
+            font=midi_font_bold,
+            command=self.predict_personality,
+            relief=tk.FLAT,
+            activebackground=active_bg_color,
+            activeforeground=active_fg_color,
+        )
+        self.predict_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+
+        self.progress_bar = ttk.Progressbar(self.root,
+                                            orient='horizontal',
+                                            length=300,
+                                            mode='indeterminate')
+        self.progress_bar.pack(pady=5)
+        self.progress_bar.pack_forget()
+
+        self.result_label = tk.Label(self.root,
+                                     text="",
+                                     bg=bg_color,
+                                     fg=text_color,
+                                     font=midi_font)
+        self.result_label.pack(pady=10)
+        self.registration_button.pack(pady=5)
+        self.registration_button.pack_forget()
         # TODO Add details about personality types
 
         '''
@@ -141,6 +141,7 @@ class TwitterPredictionWindow:
         '''
 
     def predict_personality(self):
+        self.result_label.config(text="")
         username = self.username_entry.get()
         tweet_count = int(self.tweet_entry.get())
 
@@ -164,6 +165,29 @@ class TwitterPredictionWindow:
         # Removal of previous error messages
         self.error_label.config(text="")
 
+        threading.Thread(target=self.prepare_prediction, args=(username, tweet_count,), daemon=True).start()
+
+    def on_scale_change(self, value):
+        self.tweet_value.set(value)
+
+    def update_scale_value(self, event):
+        try:
+            value = int(self.tweet_value.get())
+            self.scale.set(value)
+        except ValueError:
+            pass
+
+    # TODO deatails of the type
+    '''
+    def show_details(self):
+        pass
+    '''
+
+    def prepare_prediction(self, username, tweet_count):
+        self.registration_button.pack_forget()
+        self.progress_bar.pack(pady=5)
+        self.progress_bar.start()
+        self.registration_button.pack(pady=10)
         # Code to process prediction based on Twitter username
         tweets_content = get_tweets(username, tweet_count)
         if tweets_content != '':
@@ -182,8 +206,10 @@ class TwitterPredictionWindow:
             # self.button_twitter_details.pack_forget()
             return
 
-        # Removal of previous error messages
+            # Removal of previous error messages
         self.error_label.config(text="")
+        self.progress_bar.stop()
+        self.progress_bar.pack_forget()
 
         # Display of the prediction result
         self.result_label.config(text="Prediction result:\n\n "
@@ -193,20 +219,5 @@ class TwitterPredictionWindow:
         # Displaying the button after a correct prediction
         # self.button_twitter_details.pack()
 
-    def on_scale_change(self, value):
-        self.tweet_value.set(value)
-
-    def update_scale_value(self, event):
-        try:
-            value = int(self.tweet_value.get())
-            self.scale.set(value)
-        except ValueError:
-            pass
-
-    # TODO deatails of the type
-    '''
-    def show_details(self):
-        pass
-    '''
     def open_main_app_window(self):
         utils_front.open_main_app_window(self.root)
