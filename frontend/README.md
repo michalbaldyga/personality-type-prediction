@@ -1,6 +1,6 @@
 # Personality Type Prediction - frontend
 
-This project is a GUI application developed in Python for personality type prediction based on a user's digital activity using machine learning.
+This project is a Python-based GUI application that utilizes machine learning to predict a user's personality type based on their digital activity. The application provides a graphical user interface for users to interact with and input their digital data for analysis. Using advanced machine learning algorithms, the application processes the input data and generates predictions about the user's personality type.
 
 ## Packages
 
@@ -76,4 +76,6 @@ This file is responsible for showing the results of prediction.
 
 Contributions to this project are welcome. If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
+## License
 
+[MIT](https://choosealicense.com/licenses/mit/)
