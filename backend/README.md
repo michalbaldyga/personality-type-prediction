@@ -25,6 +25,17 @@ Using the `Trainer` with `PyTorch` requires `accelerate`: Run `pip3 install --up
 
 If you want to use `memorry_efficient_attention` to accelerate training use the following command to install Xformers: `pip3 install xformers`
 
+## Training
+
+In order to train the model, head to `train_model` directory and run `train.py`
+
+```bash
+  cd backend/train_model/
+  python3 train.py
+```
+
+The model will be saved in the `backend/model` directory
+
 ## Documentation
 
 https://huggingface.co/docs/transformers/tasks/sequence_classification
