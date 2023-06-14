@@ -3,10 +3,14 @@ import os
 from transformers import pipeline
 from user_input import get_input_from_user, get_tweets
 
+def _get_path_to_model():
+	path = os.path.join(os.path.dirname(__file__), 'model')
+	return path if os.path.isdir(path) else os.path.join(os.path.dirname(__file__), 'release', 'model')
+
 try:
     classifier = pipeline(
         "text-classification",
-        model=os.path.join(os.path.dirname(__file__), 'model'),
+        model=_get_path_to_model(),
         tokenizer="distilbert-base-uncased",
         framework="pt", top_k=16)
 except OSError:
