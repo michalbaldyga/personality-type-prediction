@@ -15,44 +15,6 @@ The following packages are used in this project:
     pip3 install tkinter
     ```
 
-## Installation
-
-1. Clone the repository:
-
-    ```shell
-    git clone https://github.com/michalbaldyga/personality-type-prediction.git
-    ```
-
-2. Navigate to the project directory:
-
-    ```shell
-    cd <paste-your-project-directory>
-    ```
-
-3. Install the required packages (if not already installed):
-
-    ```shell
-    pip3 install tkinter
-    ```
-
-## Usage
-
-1. Run the main script to start the application:
-
-    ```shell
-    python3 main.py
-    ```
-
-- in case of "ModuleNotFoundError: No module named 'backend'", navigate to the project directory and add it to PYTHONPATH
-
-	```shell
-	export PYTHONPATH=$PWD
-	```
-
-2. The application will open `main_window.py` file.
-
-3. To start using the app you should first click the button below the welcome text
-
 ## User Accounts
 
 - User accounts are created and managed within the application.
