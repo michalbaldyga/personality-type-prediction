@@ -1,6 +1,7 @@
 import tkinter as tk
 from constants import *
 from twitter_prediction_window import TwitterPredictionWindow
+from text_prediction_window import TextPredictionWindow
 
 
 class MainAppWindow:
@@ -50,8 +51,31 @@ class MainAppWindow:
         )
         twitter_button.pack(pady=10)
 
+        text_button = tk.Button(
+            self.root,
+            text="Text",
+            bg=twitter_color,
+            fg=button_fg_color,
+            font=midi_font_bold,
+            command=self.open_text_prediction,
+            relief=tk.FLAT,
+        )
+        text_button.config(
+            padx=2,
+            pady=2,
+            activebackground=active_bg_color,
+            activeforeground=active_fg_color,
+        )
+        text_button.pack(pady=10)
+
     def open_twitter_prediction(self):
         self.root.destroy()
         twitter_window = tk.Tk()
         app = TwitterPredictionWindow(twitter_window)
+        twitter_window.mainloop()
+
+    def open_text_prediction(self):
+        self.root.destroy()
+        twitter_window = tk.Tk()
+        app = TextPredictionWindow(twitter_window)
         twitter_window.mainloop()
