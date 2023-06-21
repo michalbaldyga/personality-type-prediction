@@ -1,6 +1,4 @@
-import os
-
-from datasets import load_dataset, ClassLabel, Dataset
+from datasets import ClassLabel, Dataset
 from transformers import AutoTokenizer, DataCollatorWithPadding, \
     AutoModelForSequenceClassification, TrainingArguments, Trainer
 import evaluate
@@ -9,11 +7,17 @@ import pandas as pd
 
 MODEL_OUTPUT_DIR = "../model"
 
+
+def load_dataset_from_csv(path):
+    """Loading dataset from csv file."""
+    df = pd.read_csv(path, delimiter='|')
+    df = pd.DataFrame(df)
+    df = df.dropna()  # Remove all None rows
+    return Dataset.from_pandas(df)
+
+
 # Load dataset and labels
-df = pd.read_csv("../../datasets/dataset_twitter.csv", delimiter='|')
-df = pd.DataFrame(df)
-df = df.dropna()  # Remove all None rows
-dataset = Dataset.from_pandas(df)
+dataset = load_dataset_from_csv("../../datasets/dataset_twitter.csv")
 dataset = dataset.train_test_split(test_size=0.2)
 labels = ClassLabel(names_file='labels.txt')
 
@@ -63,7 +67,7 @@ training_args = TrainingArguments(
     learning_rate=2e-5,
     per_device_train_batch_size=16,
     per_device_eval_batch_size=16,
-    num_train_epochs=5,
+    num_train_epochs=2,
     weight_decay=0.01,
     evaluation_strategy="epoch",
     save_strategy="epoch",
