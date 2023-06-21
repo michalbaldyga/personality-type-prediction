@@ -195,6 +195,8 @@ class TwitterPredictionWindow:
         else:
             self.error_label.config(text="Account does not exist or has no tweets")
             self.result_label.config(text="")
+            self.progress_bar.stop()
+            self.progress_bar.pack_forget()
             # Hide button in case of error
             # self.button_twitter_details.pack_forget()
             return
@@ -202,6 +204,8 @@ class TwitterPredictionWindow:
         if predicted_types is None:
             self.error_label.config(text="Can't load model")
             self.result_label.config(text="")
+            self.progress_bar.stop()
+            self.progress_bar.pack_forget()
             # Hide button in case of error
             # self.button_twitter_details.pack_forget()
             return

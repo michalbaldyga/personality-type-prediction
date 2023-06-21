@@ -9,7 +9,5 @@ def merge_data(folder_path):
             #  Read the CSV file into a DataFrame
             data = pd.read_csv(file_path, sep='|')
             # Append the data to the merged_data DataFrame
-            data.to_csv('tweets.csv', mode='a', sep='|', index=False, header=False)
+            data.to_csv('tweets_test.csv', mode='a', sep='|', index=False, header=False)
 
-
-merge_data('Tweets2\Tweets')

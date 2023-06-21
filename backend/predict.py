@@ -2,6 +2,7 @@ import os
 from transformers import pipeline
 
 
+
 def _get_path_to_model():
     path = os.path.join(os.path.dirname(__file__), 'model')
     return path if os.path.isdir(path) else os.path.join(os.path.dirname(__file__), 'release', 'model')
