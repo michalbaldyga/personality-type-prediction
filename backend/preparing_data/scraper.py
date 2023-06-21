@@ -2,46 +2,42 @@ import os
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
 
-from clear import clear_data
+from backend.clear_tweets import clear_data
+from backend.preparing_data.merge import merge_data
 
 accounts = {
-    'ENTP': ['BarackObama', 'newtgingrich', 'jonstewart', 'JeremyClarkson', 'OfficalMrBean', 'salmahayek', 'GillianA'],
+    'ENTP': ['BarackObama', 'newtgingrich'],
 
-    'INTP': ['jimmy_wales', 'PaulGAllen', 'Plaid_Page', 'Plaid_Brin', 'BenStein1944'],
+    'INTP': ['jimmy_wales', 'PaulGAllen'],
 
-    'ENTJ': ['BillGates', 'SpeakerPelosi', 'JebBush', 'Adele', 'CobieSmulders'],
+    'ENTJ': ['BillGates', 'SpeakerPelosi'],
 
-    'INTJ': ['elonmusk', 'paulkrugman', 'Schwarzenegger', 'rogerwaters', 'HillaryClinton'],
+    'INTJ': ['elonmusk', 'paulkrugman'],
 
-    'ENFP': ['justinbieber', 'RalphNader', 'SalmanRushdie', 'ariannahuff', 'katiecouric', 'TheEllenShow',
-             'shailenewoodley', 'HansZimmer'],
+    'ENFP': ['RalphNader', 'SalmanRushdie'],
 
-    'INFP': ['jk_rowling', 'bjork', 'hughlaurie', 'florencemachine', 'AoDespair', 'respektor', 'StephenAtHome'],
+    'INFP': ['jk_rowling', 'bjork'],
 
-    'ENFJ': ['katyperry', 'ddlovato', 'Oprah', 'Drake', 'MatthieuRicard', 'charlierose'],
+    'ENFJ': ['katyperry', 'ddlovato'],
 
-    'INFJ': ['adrienbrody', 'EdwardNorton', 'DavidSchwimmer', 'JoshRadnor', 'DerrenBrown'],
+    'INFJ': ['adrienbrody', 'EdwardNorton'],
 
-    'ESTJ': ['HillaryClinton', 'MichelleObama', 'EmmaWatson', 'AnnCoulter', 'BillOReilly', 'megynkelly',
-             'ebertchicago'],
+    'ESTJ': ['HillaryClinton', 'MichelleObama'],
 
-    'ISTJ': ['Nick_Offerman', 'RiversCuomo', 'danicamckellar', 'morgan_freeman', 'Ayaan'],
+    'ISTJ': ['Nick_Offerman', 'RiversCuomo'],
 
-    'ESFJ': ['JLo', 'SarahPalinUSA', 'jes_chastain', 'victoriabeckham', 'selenagomez', 'MariahCarey', 'ShaniaTwain',
-             'RealHughJackman'],
+    'ESFJ': ['JLo', 'SarahPalinUSA'],
 
-    'ISFJ': ['KimKardashian', 'kendricklamar', 'DrBrianMay', 'AnthonyHopkins', 'halleberry', 'GwynethPaltrow'],
+    'ISFJ': ['KimKardashian', 'kendricklamar'],
 
-    'ESTP': ['NiallOfficial', 'realDonaldTrump', 'Madonna', 'KevinSpacey', 'BenAffleck', 'RyanSeacrest',
-             'taylorswift13', 'MillaJovovich'],
+    'ESTP': ['NiallOfficial', 'Madonna'],
 
-    'ISTP': ['narendramodi', 'MagnusCarlsen', 'justdemi', 'AnnaKendrick47', 'RonPaul', 'TomCruise', 'TheElliotPage'],
+    'ISTP': ['narendramodi', 'MagnusCarlsen'],
 
-    'ESFP': ['Cristiano', 'neymarjr', 'shakira', 'MileyCyrus', 'BrunoMars', 'KylieJenner', 'HowardSchultz',
-             'TonyRobbins'],
+    'ESFP': ['Cristiano', 'neymarjr'],
 
-    'ISFP': ['rihanna', 'jtimberlake', 'ladygaga', 'RyanGosling', 'aMonicaBellucci', 'xtina', 'leonalewis',
-             'DrewBarrymore', 'pamelaanderson']}
+    'ISFP': ['rihanna', 'RyanGosling']
+}
 
 os.makedirs('Tweets/', exist_ok=True)
 for key in accounts:
@@ -64,11 +60,12 @@ for key, value in accounts.items():
         personality_types = [key] * len(clear_tweets)
 
         data = {
-            'Personality Type': personality_types,
-            'Tweets': clear_tweets
+            'label': personality_types,
+            'text': clear_tweets
         }
         # Creating a dataframe from the tweets list above
         tweets_df = pd.DataFrame(data=data)
 
-        tweets_df.to_csv('Tweets/' + key + '/' + account_name + '.csv', sep=';', index=False)
+        tweets_df.to_csv('Tweets/' + key + '/' + account_name + '.csv', sep='|', index=False)
 
+merge_data('Tweets')

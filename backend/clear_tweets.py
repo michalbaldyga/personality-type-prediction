@@ -4,30 +4,6 @@ import re
 def clear_data(text):
     # Removing Tweets
     text = re.sub(r'Tweets', '', text, re.DOTALL, flags=re.IGNORECASE)
-    # diffent emojis pattern
-    text = re.sub(r'\w\s\d', '', text)
-    # Emojis pattern
-    text = re.sub("["
-                  u"\U0001F600-\U0001F64F"  # emoticons
-                  u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-                  u"\U0001F680-\U0001F6FF"  # transport & map symbols
-                  u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-                  u"\U00002702-\U000027B0"
-                  u"\U000024C2-\U0001F251"
-                  u"\U0001f926-\U0001f937"
-                  u'\U00010000-\U0010ffff'
-                  u"\u200d"
-                  u"\u2640-\u2642"
-                  u"\u2600-\u2B55"
-                  u"\u23cf"
-                  u"\u23e9"
-                  u"\u231a"
-                  u"\u3030"
-                  u"\ufe0f"
-                  "]+", "", text, flags=re.UNICODE)
-
-    # Removing #
-    text = re.sub(r'#', '', text)
 
     # Removing [
     text = re.sub(r'\[', '', text)
@@ -49,9 +25,6 @@ def clear_data(text):
 
     # Removing Note 1.
     text = re.sub(r'Note [0-9]+\.', '', text, re.DOTALL, flags=re.IGNORECASE)
-
-    # Removing @user
-    text = re.sub(r'@\w+', '', text)
 
     # Removing &
     text = re.sub(r'&', '', text, re.DOTALL, flags=re.IGNORECASE)
@@ -113,12 +86,6 @@ def clear_data(text):
 
     # Replacing all multiple white spaces with single white space
     text = re.sub(r'\s+', ' ', text)
-
-    # Replace multiple exclamation marks with a single exclamation mark
-    text = re.sub(r'!{2,}', '!', text)
-
-    # Replace multiple question marks with a single question mark
-    text = re.sub(r'\?{2,}', '?', text)
 
     text = re.sub(r';', ',', text)
 
