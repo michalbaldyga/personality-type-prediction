@@ -38,7 +38,7 @@ def predict(text: str):
         best_predictions_list = []
         for prediction in best_predictions:
             best_predictions_list.append({'label': str(prediction[0]),
-                                          'percent': f"{round((prediction[1] / score) * 100, 2)}%"})
+                                          'percent': f"{round((prediction[1] / score) * 100, 1)}%"})
 
         return best_predictions_list
     else:

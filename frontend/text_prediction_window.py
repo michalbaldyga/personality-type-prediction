@@ -146,9 +146,10 @@ class TextPredictionWindow:
 
         # Display of the prediction result
         self.result_label.config(text="Prediction result:\n\n "
-                                      + "  1." + predicted_types[0]
-                                      + "  2." + predicted_types[1]
-                                      + "  3." + predicted_types[2])
+                                      + "  1." + predicted_types[0]['label'] + " (" + predicted_types[0]['percent']
+                                      + ")  2." + predicted_types[1]['label'] + " (" + predicted_types[1]['percent']
+                                      + ")  3." + predicted_types[2]['label'] + " (" + predicted_types[2]['percent']
+                                      + ")")
 
     def open_main_app_window(self):
         utils_front.open_main_app_window(self.root)
