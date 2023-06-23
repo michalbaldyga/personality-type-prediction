@@ -22,7 +22,7 @@ def test_model():
     # Initialize the classifier
     classifier = pipeline(
         "text-classification",
-        model="D:\\studia\\pg\\ptp\\backend\\model",
+        model=_get_path_to_model(),
         tokenizer="distilbert-base-uncased",
         framework="pt")
 
