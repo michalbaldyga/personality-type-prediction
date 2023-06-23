@@ -210,16 +210,17 @@ class TwitterPredictionWindow:
             # self.button_twitter_details.pack_forget()
             return
 
-            # Removal of previous error messages
+        # Removal of previous error messages
         self.error_label.config(text="")
         self.progress_bar.stop()
         self.progress_bar.pack_forget()
 
         # Display of the prediction result
         self.result_label.config(text="Prediction result:\n\n "
-                                      + "  1." + predicted_types[0]
-                                      + "  2." + predicted_types[1]
-                                      + "  3." + predicted_types[2])
+                                      + "  1." + predicted_types[0]['label'] + " (" + predicted_types[0]['percent']
+                                      + ")  2." + predicted_types[1]['label'] + " (" + predicted_types[1]['percent']
+                                      + ")  3." + predicted_types[2]['label'] + " (" + predicted_types[2]['percent']
+                                      + ")")
         # Displaying the button after a correct prediction
         # self.button_twitter_details.pack()
 
