@@ -25,17 +25,19 @@ def predict(text: str):
         batches = [text[i:i + batch_size] for i in range(0, len(text), batch_size)]
 
         # predict
-        score = 0.
         predictions = {}
         for batch in batches:
             result = classifier(batch, padding=True)
             for res in result[0]:
                 predictions[res['label']] = predictions.get(res['label'], 0) + res['score']
-                score += res['score']
 
         # get the best three as a list of personality types
         best_predictions = sorted(predictions.items(), key=lambda item: item[1], reverse=True)[0:3]
         best_predictions_list = []
+        score = 0.
+        for prediction in best_predictions:
+            score += prediction[1]
+
         for prediction in best_predictions:
             best_predictions_list.append({'label': str(prediction[0]),
                                           'percent': f"{round((prediction[1] / score) * 100, 2)}%"})
