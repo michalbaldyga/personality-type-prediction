@@ -27,8 +27,8 @@ The following steps were executed to prepare the data:
 
 1. **Data Collection**: We gathered posts containing MBTI types from various online communities.
 
-    2. **Preprocessing**: The text data was cleaned by removing irrelevant content, such as URLs and special characters.
-    3. **Feature Extraction**: We extracted relevant features from the text, including word frequencies and sentiment analysis scores.
+2. **Preprocessing**: The text data was cleaned by removing irrelevant content, such as URLs and special characters.
+3. **Feature Extraction**: We extracted relevant features from the text, including word frequencies and sentiment analysis scores.
 
 
 
