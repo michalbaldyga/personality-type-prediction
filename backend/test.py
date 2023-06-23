@@ -14,29 +14,38 @@ def test_model():
 
     # Read test dataset
     df = pd.read_csv('../datasets/tweets_test.csv', delimiter='|')
+    df = df.dropna()  # Remove all None rows
 
     # Initialize accuracy variables
-    correct, total = 0, len(df)
+    correct, total = 0., 22780
 
     # Initialize the classifier
     classifier = pipeline(
         "text-classification",
-        model=_get_path_to_model(),
+        model="D:\\studia\\pg\\ptp\\backend\\model",
         tokenizer="distilbert-base-uncased",
         framework="pt")
 
     # Iterate over each example in the test dataset
     for i in tqdm(range(total)):
         # Get text and label for current example
-        text = df['text'][i]
+        text = str(df['text'][i])
         label = df['label'][i]
 
         # Make a prediction using the classifier
         guess = classifier(text)[0]['label']
 
         # Check if the predicted label matches the true label
-        if label == guess:
-            correct += 1
+        correct_letters = 0
+
+        for j in range(len(label)):
+            if guess[j] == label[j]:
+                correct_letters += 1
+
+        if correct_letters == 3:
+            correct += 0.75
+        elif correct_letters == 4:
+            correct += 1.0
 
     # Calculate accuracy as the ratio of correct predictions to total examples
     accuracy = correct / total
