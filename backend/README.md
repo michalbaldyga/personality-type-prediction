@@ -25,6 +25,12 @@ The following packages are used in this project:
 - `predict.py`: A Python script that utilizes a trained BERT model to make predictions on new or unseen data, specifically targeting the task of personality type prediction, where the model takes input text and determines the corresponding personality type based on the learned patterns.
 - `test.py`: A Python script designed to assess the accuracy and performance of a trained model by applying it to a separate test dataset, enabling the evaluation of how well the model generalizes to unseen data and providing insights into its effectiveness for the specific task at hand.
 
+## Folders
+
+- `preparing_data`: Contains various scripts related to parsing and preparing data
+- `release`: Contains trained model which will be used by default
+- `train_model`: Contains a script used for training model by a user alone
+
 
 ## Training
 
@@ -35,7 +41,7 @@ In order to train the model, head to `train_model` directory and run `train.py`
   python3 train.py
 ```
 
-The model will be saved in the `backend/release/model` directory
+The model will be saved in the `backend/model` directory and will be used instead of the one in `backend/release/model`
 
 ## Testing
 
